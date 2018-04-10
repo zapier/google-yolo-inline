@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Yolo Inline Demo by Zapier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="sign-up">
+      <iframe id="google-iframe" class="sign-up__google" src="/google-yolo-iframe.html"></iframe>
+      <p class="sign-up__divider">or</p>
+      <input class="sign-up__field" type="email" name="email" placeholder="Email" />
+      <input class="sign-up__field" type="password" name="password" placeholder="Password" />
+      <button class="sign-up__button">Sign Up</button>
+    </div>
+
+    <script type="text/javascript">
+      window.addEventListener('message', (event) => {
+        const iframeElt = document.getElementById('google-iframe');
+
+        switch(event.data.type) {
+          case 'verifyPing':
+            // This part handles the initial handshake by the Google Yolo iframe.
+            console.log('Acknowledging ping.');
+            event.source.postMessage({
+              type: 'verifyAck',
+              data: event.data.data
+            }, '*');
+            break;
+          case 'credential':
+            // The user selected a credential.
+            console.log('Received credential!', event.data.credential);
+            break;
+          case 'error':
+            // An error happened.
+            console.log('Error:', event.data.error);
+            break;
+          case 'height':
+            iframeElt.style.height = (parseInt(event.data.height) - 18) + 'px';
+            break;
+          default:
+            // Do nothing.
+        }
+      });
+    </script>
+  </body>
+</html>

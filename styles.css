@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F1F4F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.sign-up {
+  background-color: #FFF;
+  border-radius: 4px;
+  border: 1px solid #DADFE2;
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 400px;
+  padding: 20px;
+}
+
+@media screen and (max-width: 400px) {
+  .sign-up {
+    min-width: unset;
+  }
+}
+
+.sign-up__google {
+  border: none;
+  margin: 5px 0;
+}
+
+.sign-up__divider {
+  color: #969EA2;
+  text-align: center;
+}
+
+.sign-up__field {
+  height: 45px;
+  border-radius: 4px;
+  border: 1px solid #DADFE2;
+  font-size: 1rem;
+  margin: 5px 0;
+  padding: 10px;
+}
+
+.sign-up__button {
+  height: 45px;
+  border-radius: 4px;
+  border: none;
+  background-color: #499DF3;
+  font-size: 1rem;
+  color: #FFF;
+  margin: 5px 0;
+}

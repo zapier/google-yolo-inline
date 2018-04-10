@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IFrame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .google-inserted-frame {
+        position: static !important;
+        width: calc(100% + 18px) !important;
+        margin: -18px 0 0 0;
+      }
+    </style>
+    <script defer src="https://smartlock.google.com/client"></script>
+    <script>
+      const PUBLIC_CLIENT_ID =
+          '642352673603-eofqnbap1k8dr6nfo2clqcbgk2tmcrok.apps.googleusercontent.com';
+      const CONFIG = {
+        supportedAuthMethods: [
+          'googleyolo://id-and-password',
+          'https://accounts.google.com'
+        ],
+        supportedIdTokenProviders: [{
+          uri: 'https://accounts.google.com',
+          clientId: PUBLIC_CLIENT_ID
+        }]
+      };
+
+      window.onGoogleYoloLoad = (googleyolo) => {
+        console.log("GoogleYolo loaded.");
+        // Set the rendering mode of the IFrame. By default, Google Yolo iframe will decide
+        // by itself where to position. bottomSheet is at the bottom of the screen on mobile,
+        // navPopout is the top right card on desktop. Forcing the rendering mode here to a
+        // single value makes sure that we have consistent behavior when positioning this iframe.\
+        openyolo.setRenderMode('navPopout');
+
+        googleyolo.hint(CONFIG).then((credential) => {
+          // '*' is used as a placeholder, you MUST set here the top level domain.
+          window.parent.postMessage(
+              {type: 'credential', credential}, '*' /* REPLACE BY TOP LEVEL DOMAIN! */);
+        }, (error) => {
+          // '*' is used as a placeholder, you MUST set here the top level domain.
+          window.parent.postMessage({type: 'error', error}, '*' /* REPLACE BY TOP LEVEL DOMAIN! */);
+        });
+
+        // This mutation observer is responsible for watching the Google YOLO iframe
+        // for height changes. Because this iframe loads async. we will need to
+        // calculate at some point in the future what the height of the iframe is.
+        // Otherwise we will end up cutting off content (forcing the user to scroll)
+        // or displaying too height (bad design).
+        const observer = new MutationObserver(mutationsList => {
+          const iframe = mutationsList[0].addedNodes[0];
+
+          if (iframe && iframe.nodeName === 'IFRAME') {
+            iframe.classList.add('google-inserted-frame');
+
+            // We need one more observer to watch the <iframe> that Google Yolo
+            // inserted. It's style attribute will be updated with a height that
+            // needs to be passed back up to the parent iframe, to avoid any
+            // clipping
+            const childObserver = new MutationObserver(childMutationsList => {
+              const childIframe = childMutationsList[0].target;
+
+              window.parent.postMessage(
+                  {type: 'height', height: childIframe.style.height}, '*' /* REPLACE BY TOP LEVEL DOMAIN! */);
+            });
+
+            childObserver.observe(iframe, { attributes: true });
+          }
+        });
+
+        observer.observe(window.document.body, { childList: true });
+
+        // Add a <style> for the Google YOLO iframe, once it renders
+        // const style = window.document.createElement('style');
+        // style.type = 'text/css';
+        // style.appendChild(
+        //   window.document.createTextNode(
+        //     '.google-inserted-frame { width: 100% !important; }'
+        //   )
+        // );
+        // window.document.head.appendChild(style);
+      };
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

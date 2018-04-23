@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IFrame</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
@@ -30,7 +29,6 @@
       };
 
       window.onGoogleYoloLoad = (googleyolo) => {
-        console.log("GoogleYolo loaded.");
         // Set the rendering mode of the IFrame. By default, Google Yolo iframe will decide
         // by itself where to position. bottomSheet is at the bottom of the screen on mobile,
         // navPopout is the top right card on desktop. Forcing the rendering mode here to a
@@ -73,16 +71,6 @@
         });
 
         observer.observe(window.document.body, { childList: true });
-
-        // Add a <style> for the Google YOLO iframe, once it renders
-        // const style = window.document.createElement('style');
-        // style.type = 'text/css';
-        // style.appendChild(
-        //   window.document.createTextNode(
-        //     '.google-inserted-frame { width: 100% !important; }'
-        //   )
-        // );
-        // window.document.head.appendChild(style);
       };
     </script>
   </head>

@@ -27,12 +27,12 @@ body {
   }
 }
 
-/* Styles for demo, you can ignore the rest */
-
 .sign-up__google {
   border: none;
   margin: 5px 0;
 }
+
+/* Styles for the page, you can ignore the rest */
 
 .sign-up__divider {
   color: #969EA2;

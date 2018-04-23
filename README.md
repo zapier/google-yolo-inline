@@ -11,6 +11,18 @@ By default, Google one tap sign-up shows as a `position: fixed` popup that overl
 ![Screenshot of hipmunk.com with Google one tap sign-up overlayed](https://user-images.githubusercontent.com/709153/39146066-87996ae0-46ea-11e8-9276-51f980588673.png)
 *Example from hipmunk.com showing Google one tap out-of-the-box.*
 
+## Usage
+
+Include `google-yolo-iframe.html` in your project, then insert the following in your sign up form:
+
+```
+<iframe id="google-iframe" src="google-yolo-iframe.html"></iframe>
+```
+
+In the place of the standard `onGoogleYoloLoad` [callback handlers](https://developers.google.com/identity/one-tap/web/retrieve-hints#handle_the_hint_request_result), you'll instead register for `window.addEventListener('message', () => { /* handler here */ })`, which catches events from `google-yolo-iframe.html`.
+
+When `event.data.type === 'height'` is caught, this means GoogleYolo's iframe has changed height. Be sure to update `google-iframe`'s height.
+
 ## Technical Details
 
 Google one tap sign-up works by inserting an `<iframe>` into your document's `<body>` with `position: fixed` and `z-index: 9999` to overlay your website. Under the hood, Google one tap sign-up is based on [OpenYOLO-Web](https://github.com/openid/OpenYOLO-Web), which permits you to embed it within *another* `<iframe>` that you control. See [GoogleYoloIframed](https://github.com/TMSCH/GoogleYoloIframed) for a basic example.

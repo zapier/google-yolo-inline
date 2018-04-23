@@ -27,6 +27,8 @@ body {
   }
 }
 
+/* Styles for demo, you can ignore the rest */
+
 .sign-up__google {
   border: none;
   margin: 5px 0;
@@ -35,23 +37,42 @@ body {
 .sign-up__divider {
   color: #969EA2;
   text-align: center;
+  font-size: 14px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.sign-up__divider::before,
+.sign-up__divider::after {
+  content: '';
+  height: 1px;
+  flex: 1 0 0;
+  background-color: #DADFE2;
+}
+
+.sign-up__divider::before {
+  margin-right: 20px;
+}
+
+.sign-up__divider::after {
+  margin-left: 20px;
 }
 
 .sign-up__field {
   height: 45px;
   border-radius: 4px;
-  border: 1px solid #DADFE2;
-  font-size: 1rem;
+  border: 2px solid #DADFE2;
   margin: 5px 0;
-  padding: 10px;
+  font-size: 14px;
+  color: #969EA2;
+  padding: 13px;
 }
 
 .sign-up__button {
   height: 45px;
   border-radius: 4px;
   border: none;
-  background-color: #499DF3;
-  font-size: 1rem;
-  color: #FFF;
+  background-color: #DADFE2;
   margin: 5px 0;
 }

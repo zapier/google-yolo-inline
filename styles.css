@@ -3,6 +3,7 @@
 }
 
 body {
+  margin: 0;
   background-color: #F1F4F5;
   display: flex;
   align-items: center;
@@ -21,15 +22,18 @@ body {
   padding: 20px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 405px) {
   .sign-up {
     min-width: unset;
+    flex: 1 0 0;
+    padding: 10px;
   }
 }
 
 .sign-up__google {
   border: none;
   margin: 5px 0;
+  width: 100%;
 }
 
 /* Styles for the page, you can ignore the rest */

@@ -22,7 +22,7 @@
         switch(event.data.type) {
           case 'verifyPing':
             // This part handles the initial handshake by the Google Yolo iframe.
-            console.log('Acknowledging ping.');
+            // It is sent by OpenYOLO https://github.com/openid/OpenYOLO-Web/blob/dc841704619d7801da0b860c91953ff730fca07f/ts/protocol/post_messages.ts#L27
             event.source.postMessage({
               type: 'verifyAck',
               data: event.data.data

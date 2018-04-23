@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <script defer src="https://smartlock.google.com/client"></script>
+
     <div class="sign-up">
-      <iframe id="google-iframe" class="sign-up__google" src="google-yolo-iframe.html"></iframe>
+      <div id="google-container"></div>
       <p class="sign-up__divider">or</p>
       <div class="sign-up__field">Email</div>
       <div class="sign-up__field">Password</div>
@@ -16,33 +18,92 @@
     </div>
 
     <script type="text/javascript">
-      window.addEventListener('message', (event) => {
-        const iframeElt = document.getElementById('google-iframe');
+      const PUBLIC_CLIENT_ID =
+          '642352673603-eofqnbap1k8dr6nfo2clqcbgk2tmcrok.apps.googleusercontent.com';
+      const CONFIG = {
+        supportedAuthMethods: [
+          'googleyolo://id-and-password',
+          'https://accounts.google.com'
+        ],
+        supportedIdTokenProviders: [{
+          uri: 'https://accounts.google.com',
+          clientId: PUBLIC_CLIENT_ID
+        }]
+      };
 
-        switch(event.data.type) {
-          case 'verifyPing':
-            // This part handles the initial handshake by the Google Yolo iframe.
-            console.log('Acknowledging ping.');
-            event.source.postMessage({
-              type: 'verifyAck',
-              data: event.data.data
-            }, '*');
-            break;
-          case 'credential':
-            // The user selected a credential.
-            console.log('Received credential!', event.data.credential);
-            break;
-          case 'error':
-            // An error happened.
-            console.log('Error:', event.data.error);
-            break;
-          case 'height':
-            iframeElt.style.height = (parseInt(event.data.height) - 18) + 'px';
-            break;
-          default:
-            // Do nothing.
-        }
-      });
+      window.onGoogleYoloLoad = (googleyolo) => {
+        // Set the rendering mode of the IFrame. By default, Google Yolo iframe will decide
+        // by itself where to position. bottomSheet is at the bottom of the screen on mobile,
+        // navPopout is the top right card on desktop. Forcing the rendering mode here to a
+        // single value makes sure that we have consistent behavior when positioning this iframe.\
+        openyolo.setRenderMode('navPopout');
+
+        googleyolo.hint(CONFIG);
+
+        // This mutation observer is responsible for watching the Google YOLO iframe
+        // for height changes. Because this iframe loads async. we will need to
+        // calculate at some point in the future what the height of the iframe is.
+        // Otherwise we will end up cutting off content (forcing the user to scroll)
+        // or displaying too height (bad design).
+        const bodyObserver = new MutationObserver(mutationsList => {
+          mutationsList.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeName === 'IFRAME' && node.src.includes('smartlock.google.com/iframe/')) {
+                bodyObserver.disconnect();
+
+                document.body.removeChild(node);
+                const container = document.getElementById('google-container');
+                container.appendChild(node);
+
+                node.classList.add('google-inserted-frame');
+
+                //googleIframeObserver.observe(node, { attributes: true });
+              }
+            });
+          });
+        });
+
+        // We need one more observer to watch the <iframe> that Google Yolo
+        // inserted. It's style attribute will be updated with a height that
+        // needs to be passed back up to the parent iframe, to avoid any
+        // clipping
+        const googleIframeObserver = new MutationObserver(childMutationsList => {
+          const childIframe = childMutationsList[0].target;
+
+          window.parent.postMessage(
+              {type: 'height', height: childIframe.style.height}, '*' /* REPLACE BY TOP LEVEL DOMAIN! */);
+        });
+
+        bodyObserver.observe(document.body, { childList: true });
+      };
+
+      // window.addEventListener('message', (event) => {
+      //   const iframeElt = document.getElementById('google-iframe');
+      //
+      //   switch(event.data.type) {
+      //     case 'verifyPing':
+      //       // This part handles the initial handshake by the Google Yolo iframe.
+      //       console.log('Acknowledging ping.');
+      //       event.source.postMessage({
+      //         type: 'verifyAck',
+      //         data: event.data.data
+      //       }, '*');
+      //       break;
+      //     case 'credential':
+      //       // The user selected a credential.
+      //       console.log('Received credential!', event.data.credential);
+      //       break;
+      //     case 'error':
+      //       // An error happened.
+      //       console.log('Error:', event.data.error);
+      //       break;
+      //     case 'height':
+      //       iframeElt.style.height = (parseInt(event.data.height) - 18) + 'px';
+      //       break;
+      //     default:
+      //       // Do nothing.
+      //   }
+      // });
     </script>
   </body>
 </html>

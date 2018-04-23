@@ -1,6 +1,6 @@
 # google-yolo-inline
 
-A demo showing how to seamlessly include [Google one tap sign-up](https://developers.google.com/identity/one-tap/web/overview) (a.k.a. Google Yolo) into your own sign up form.
+A [demo](https://zapier.github.io/google-yolo-inline/) showing how to seamlessly include [Google one tap sign-up](https://developers.google.com/identity/one-tap/web/overview) (a.k.a. Google Yolo) into your own sign up form.
 
 ![GIF of the Google account picker rendering inline with your own sign up form](https://cdn.zapier.com/storage/photos/b967f8451579c9de604e54ae3f18d19f.gif)
 

@@ -6,7 +6,7 @@
 
 ## Problems With Google One Tap
 
-By default, Google one tap sign-up shows as a `position: fixed` popup that overlays your website. This can frustrate your users if it occludes important information or navigation. Users may also be confused if this is the first time they've seen Google one tap sign-up, since traditional ["Sign in with Google"](https://developers.google.com/identity/branding-guidelines) experiences are not found in an overlay/popup.
+By default, Google one tap sign-up shows as a `position: fixed` popup that overlays your website. This can frustrate your users if it occludes important information or navigation. Users may also be confused if this is the first time they've seen Google one tap sign-up, since most ["Sign in with Google"](https://developers.google.com/identity/branding-guidelines) experiences today are along side a traditional sign up form, not isolated in their own popup.
 
 ![Screenshot of hipmunk.com with Google one tap sign-up overlayed](https://user-images.githubusercontent.com/709153/39146066-87996ae0-46ea-11e8-9276-51f980588673.png)
 *Example from hipmunk.com showing Google one tap's out-of-the-box experience.*

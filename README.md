@@ -6,14 +6,14 @@
 
 ## Problems With Google One Tap
 
-By default, Google one tap sign-up shows as a `position: fixed` popup that overlays your website. Having it detached (or overlapping) from your own sign up forms can lead to a confusing UX.
+By default, Google one tap sign-up shows as a `position: fixed` popup that overlays your website. This can frustrate your users if it occludes important information or navigation. Users may also be confused if this is the first time they've seen Google one tap sign-up, since traditional ["Sign in with Google"](https://developers.google.com/identity/branding-guidelines) experiences are not found in an overlay/popup.
 
 ![Screenshot of hipmunk.com with Google one tap sign-up overlayed](https://user-images.githubusercontent.com/709153/39146066-87996ae0-46ea-11e8-9276-51f980588673.png)
 *Example from hipmunk.com showing Google one tap's out-of-the-box experience.*
 
 ## Solution
 
-By wrapping Google one tap in an `<iframe>`, you can include it inline with your own sign up form, or wherever makes sense.
+We recommend wrapping Google one tap in an `<iframe>` so you can include it inline with your own sign up form, or wherever makes sense for your website.
 
 ![GIF of the Google account picker rendering inline with your own sign up form](https://cdn.zapier.com/storage/photos/b967f8451579c9de604e54ae3f18d19f.gif)
 

@@ -2,14 +2,14 @@
 
 [View Demo](https://zapier.github.io/google-yolo-inline/)
 
-[`index.html`](index.html) shows how to seamlessly include [Google one tap sign-up](https://developers.google.com/identity/one-tap/web/overview) (a.k.a. Google Yolo) into your own sign up form, or wherever it makes sense for your website.
+[`index.html`](index.html) shows how to seamlessly include [Google one tap sign-up](https://developers.google.com/identity/one-tap/web/overview) (a.k.a. Google Yolo) into your own sign up form, or wherever it makes sense for your website, to help your sign up conversion rate 🚀
 
 ## Problems With Google One Tap
 
 By default, Google one tap sign-up shows as a `position: fixed` popup that overlays your website. Having it detached (or overlapping) from your own sign up forms can lead to a confusing UX.
 
 ![Screenshot of hipmunk.com with Google one tap sign-up overlayed](https://user-images.githubusercontent.com/709153/39146066-87996ae0-46ea-11e8-9276-51f980588673.png)
-*Example from hipmunk.com showing Google one tap out-of-the-box.*
+*Example from hipmunk.com showing Google one tap's out-of-the-box experience.*
 
 ## Solution
 

@@ -15,7 +15,7 @@ By default, Google one tap sign-up shows as a `position: fixed` popup that overl
 
 We recommend wrapping Google one tap in an `<iframe>` so you can include it inline with your own sign up form, or wherever makes sense for your website.
 
-![GIF of the Google account picker rendering inline with your own sign up form](https://cdn.zapier.com/storage/photos/b967f8451579c9de604e54ae3f18d19f.gif)
+![GIF of the Google account picker rendering inline with your own sign up form](https://user-images.githubusercontent.com/709153/39495663-0fbc51b0-4d50-11e8-9f3e-0471f5eaf8b9.gif)
 
 ## Technical Details
 

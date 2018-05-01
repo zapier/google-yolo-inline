@@ -38,6 +38,13 @@ body {
 
 /* Styles for the page, you can ignore the rest */
 
+.sign-up__title {
+  font-size: 25px;
+  font-weight: 600;
+  color: #969EA2;
+  margin: 0 0 10px;
+}
+
 .sign-up__divider {
   color: #969EA2;
   text-align: center;

@@ -1,4 +1,4 @@
-# Google One Tap Sign-Up, Inline
+# Inline Google One Tap Sign-Up
 
 [View Demo](https://zapier.github.io/google-yolo-inline/)
 

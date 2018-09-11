@@ -18,10 +18,9 @@
     <script defer src="https://smartlock.google.com/client"></script>
     <script>
       const PUBLIC_CLIENT_ID =
-          '642352673603-eofqnbap1k8dr6nfo2clqcbgk2tmcrok.apps.googleusercontent.com';
+          '412842310182-nnsbnt2ropvf4ujenj9ueib2vupdd5sj.apps.googleusercontent.com';
       const CONFIG = {
         supportedAuthMethods: [
-          'googleyolo://id-and-password',
           'https://accounts.google.com'
         ],
         supportedIdTokenProviders: [{
@@ -50,7 +49,7 @@
           messageParent({ type: 'credential', credential });
         }, (error) => {
           messageParent({ type: 'error', error });
-
+        
           if (error.type === 'noCredentialsAvailable') {
             window.document.body.innerHTML = '<p>Make sure you are signed in to your Google account in this browser. Alternatively, you could fall back to <a href="https://support.google.com/a/answer/60224">Google SSO</a> in this case.</p>';
           }
@@ -73,7 +72,25 @@
                 // clipping. The height can change if the user is signed in with
                 // many Google accounts, and clicks the 'X more accounts' button.
                 const attributeObserver = new MutationObserver(iframeMutationsList => {
-                  const height = iframeMutationsList[0].target.style.height;
+                  let height = parseInt(iframeMutationsList[0].target.style.height);
+                  
+                  if (height === 341) {
+                    // One account is shown
+                    height = 228 - 18;
+                  }
+                  else if (height === 261) {
+                    // Two accounts shown
+                    height = 177;
+                  }
+                  else if (height === 298) {
+                    // Three or more accounts shown
+                    height = 215;
+                  }
+                  else {
+                    // Likely the expanded state, let true height through, minus top padding
+                    height -= 18;
+                  }
+                  
                   messageParent({type: 'height', height});
                 });
 

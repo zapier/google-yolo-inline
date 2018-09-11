@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="sign-up">
-      <h1 class="sign-up__title">Sign Up for Example.com</h1>
+      <h1 class="sign-up__title">Sign Up for Localhost</h1>
       <iframe id="google-iframe" class="sign-up__google" src="google-yolo-iframe.html"></iframe>
       <p class="sign-up__divider">or</p>
       <div class="sign-up__field">Email</div>
@@ -39,8 +39,7 @@
             break;
           case 'height':
             // Update the parent <iframe> height to match GoogleYolo <iframe> height
-            // We subtract 18px to account for GoogleYolo's internal padding
-            iframeElt.style.height = (parseInt(event.data.height) - 18) + 'px';
+            iframeElt.style.height = event.data.height + 'px';
             break;
           default:
             // Do nothing.
